@@ -70,6 +70,9 @@ export class ListNominatedTextbooksComponent implements OnInit, AfterViewInit, O
   public paginatedContributorOrgUsers: any = [];
   public allContributorOrgUsers: any = [];
   showUsersLoader = true;
+  showContributorProfile = false;
+  showProfileForSourcing = false;
+  contributorProfile: any = {};
   OrgUsersCnt = 0;
   pager: IPagination;
   pageNumber = 1;
@@ -105,6 +108,12 @@ export class ListNominatedTextbooksComponent implements OnInit, AfterViewInit, O
       id: this.userService.appId,
       pid: this.configService.appConfig.TELEMETRY.PID
     };
+  }
+
+  showProfilePopup(user) {
+    this.showContributorProfile = true;
+    this.contributorProfile = user;
+    console.log('this.contributorProfile: ', this.contributorProfile);
   }
 
   sortCollection(column) {

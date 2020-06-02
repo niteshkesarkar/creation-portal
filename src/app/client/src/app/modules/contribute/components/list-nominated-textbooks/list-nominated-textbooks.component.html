@@ -304,7 +304,10 @@
 						</thead>
 						<tbody class="sb-table-body">
 						  <tr *ngFor="let orgUser of contributorOrgUser; let i= index;">
-							<td>{{orgUser.name}}</td>
+							<td>
+								<a class="cursor-pointer text-decoration-underline sb-color-primary"
+								(click)="showProfilePopup(orgUser)">{{orgUser?.name}} </a>
+							</td>
 							<td>
 								<div *ngIf="orgUser?.maskedEmail">{{orgUser?.maskedEmail}}</div>
 								<div *ngIf="orgUser?.maskedPhone"> {{orgUser?.maskedPhone}}</div>
@@ -352,6 +355,13 @@
 		</sui-tabset>
 	</div>
 </div>
+
+<app-contributor-profile-popup
+	[showProfile]="showContributorProfile"
+	[orgId]="contributorProfile?.organisation_id"
+	[userId]="contributorProfile?.user_id"
+	(close)="showContributorProfile = false;">
+</app-contributor-profile-popup>
 
 <ng-container *ngIf="currentStage !== 'listNominatedTextbookComponent'">
 	<ndc-dynamic [ndcDynamicComponent]="component" [ndcDynamicInputs]="dynamicInputs" [ndcDynamicOutputs]="outputs">

@@ -38,8 +38,21 @@ import { HelpPageComponent } from './components/help-page/help-page.component';
     UserLocationComponent, EnrollContributorComponent, ProgramListComponent, DaysToGoPipe,
     TextbookListComponent, OrgUsersListComponent, HelpPageComponent, ContributorProfilePopupComponent
   ],
-  exports: [ViewAllComponent, ProfileFrameworkPopupComponent, TermsAndConditionsPopupComponent,
-    OtpPopupComponent, BatchInfoComponent, SsoMergeConfirmationComponent, ValidateTeacherIdentifierPopupComponent,
-    UserLocationComponent, EnrollContributorComponent, ProgramListComponent, DaysToGoPipe, TextbookListComponent, OrgUsersListComponent]
+  exports: [
+    ViewAllComponent,
+    ProfileFrameworkPopupComponent,
+    TermsAndConditionsPopupComponent,
+    OtpPopupComponent,
+    BatchInfoComponent,
+    SsoMergeConfirmationComponent,
+    ValidateTeacherIdentifierPopupComponent,
+    UserLocationComponent,
+    EnrollContributorComponent,
+    ProgramListComponent,
+    DaysToGoPipe,
+    TextbookListComponent,
+    OrgUsersListComponent,
+    ContributorProfilePopupComponent
+  ]
 })
 export class SharedFeatureModule { }
