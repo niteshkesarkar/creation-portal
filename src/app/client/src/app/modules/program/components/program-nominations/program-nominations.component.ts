@@ -40,7 +40,9 @@ export class ProgramNominationsComponent implements OnInit, AfterViewInit, OnDes
   public sessionContext: ISessionContext = {};
   public userProfile: any;
   public selectedNomination: any;
+  public selectedSourcingUser: any;
   public showContributorProfilePopup = false;
+  public showSourcingUserProfilePopup = false;
   public telemetryImpression: IImpressionEventInput;
   public telemetryInteractCdata: any;
   public telemetryInteractPdata: any;
@@ -549,6 +551,11 @@ export class ProgramNominationsComponent implements OnInit, AfterViewInit, OnDes
   showSelectedContributorProfile(nomination) {
     this.showContributorProfilePopup = true;
     this.selectedNomination = nomination.nominationData;
+  }
+
+  showSelectedSourcingUserProfile(user) {
+    this.showSourcingUserProfilePopup = true;
+    this.selectedSourcingUser = user;
   }
 
   viewNominationDetails(nomination) {

@@ -71,7 +71,6 @@ export class ListNominatedTextbooksComponent implements OnInit, AfterViewInit, O
   public allContributorOrgUsers: any = [];
   showUsersLoader = true;
   showContributorProfile = false;
-  showProfileForSourcing = false;
   contributorProfile: any = {};
   OrgUsersCnt = 0;
   pager: IPagination;
@@ -110,10 +109,9 @@ export class ListNominatedTextbooksComponent implements OnInit, AfterViewInit, O
     };
   }
 
-  showProfilePopup(user) {
+  showProfilePopup(profile) {
     this.showContributorProfile = true;
-    this.contributorProfile = user;
-    console.log('this.contributorProfile: ', this.contributorProfile);
+    this.contributorProfile = profile.User;
   }
 
   sortCollection(column) {
@@ -311,7 +309,6 @@ export class ListNominatedTextbooksComponent implements OnInit, AfterViewInit, O
     this.paginatedContributorOrgUsers = _.chunk( this.allContributorOrgUsers, this.pageLimit);
     this.contributorOrgUser = this.paginatedContributorOrgUsers[this.pageNumber-1];
     this.pager = this.paginationService.getPager(this.OrgUsersCnt, this.pageNumber, this.pageLimit);
-
     if (this.directionOrgUsers === 'asc' || this.directionOrgUsers === '') {
       this.directionOrgUsers = 'desc';
     } else {
@@ -395,8 +392,7 @@ export class ListNominatedTextbooksComponent implements OnInit, AfterViewInit, O
           this.OrgUsersCnt = this.allContributorOrgUsers.length;
           this.sortOrgUsers('projectselectedRole');
           this.showUsersLoader = false;
-        }
-        else {
+        } else {
           this.showUsersLoader = false;
         }
       });

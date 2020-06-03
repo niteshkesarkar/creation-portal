@@ -344,7 +344,10 @@
 						</thead>
 						<tbody class="sb-table-body">
 						  <tr *ngFor="let orgUser of sourcingOrgUser; let i= index;">
-                            <td>{{orgUser?.firstName}} {{orgUser?.lastName}}</td>
+                            <td>
+								<div class="sb__ellipsis sb__ellipsis--three sb-color-primary font-weight-bold"
+								(click)="showSelectedSourcingUserProfile(orgUser)">{{orgUser?.firstName}} {{orgUser?.lastName}}</div>
+                            </td>
                             <td>
                                 <div *ngIf="orgUser?.maskedEmail">{{orgUser?.maskedEmail}}</div>
                                 <div *ngIf="orgUser?.maskedPhone"> {{orgUser?.maskedPhone}}</div>
@@ -464,6 +467,14 @@
             </div>
         </sui-tabset>
     </div>
+
+    <app-contributor-profile-popup
+    *ngIf="showSourcingUserProfilePopup"
+    [showProfile]="showSourcingUserProfilePopup"
+    [userId]="selectedSourcingUser?.identifier"
+    [showOrgData]="false"
+    (close)="showSourcingUserProfilePopup = false;">
+    </app-contributor-profile-popup>
 
     <app-contributor-profile-popup
     *ngIf="showContributorProfilePopup"

@@ -1,7 +1,10 @@
+import { isUndefined } from 'util';
+import { isEmpty } from 'rxjs/operators';
 import { UserService, ProgramsService } from '@sunbird/core';
 import { ResourceService, ToasterService  } from '@sunbird/shared';
 import { Component, OnInit, Input, ViewChild, OnDestroy, Output, EventEmitter, } from '@angular/core';
 import * as _ from 'lodash-es';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contributor-profile-popup',
@@ -14,29 +17,46 @@ export class ContributorProfilePopupComponent implements OnInit, OnDestroy {
   @ViewChild('modal') private modal;
   @Input() userId?: string;
   @Input() orgId?: string;
+  @Input() userDetails?: any;
   @Input() showProfile: boolean;
+  @Input() showOrgData?: boolean;
   contributor: any;
   fullName: string;
   isOrg: boolean;
   showLoader = true;
+  isSourcing = false;
 
   constructor(
     public userService: UserService,
     public toasterService: ToasterService,
     public programsService: ProgramsService,
-    public resourceService: ResourceService
+    public resourceService: ResourceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    if (_.isEmpty(this.orgId) && _.isEmpty(this.userId)) {
-      this.toasterService.error('Please provide either of userId or orgId');
-      return;
+    if (_.isUndefined(this.showOrgData)) {
+      this.showOrgData = true;
     }
+    this.isSourcing = this.router.url.includes('/sourcing');
+    if (!this.isSourcing) {
+      if (_.isEmpty(this.userDetails)) {
+        this.toasterService.error('Please provide userDetails');
+        return;
+      }
+      this.contributor = this.userDetails;
+      this.setFullName();
+    } else {
+      if (_.isEmpty(this.orgId) && _.isEmpty(this.userId)) {
+        this.toasterService.error('Please provide either of userId or orgId');
+        return;
+      }
 
-    if (!_.isEmpty(this.orgId)) {
-      this.getOrgProfile();
-    } else if (!_.isEmpty(this.userId)) {
-      this.getUserProfile();
+      if (!_.isEmpty(this.orgId)) {
+        this.getOrgProfile();
+      } else if (!_.isEmpty(this.userId)) {
+        this.getUserProfile();
+      }
     }
   }
 
