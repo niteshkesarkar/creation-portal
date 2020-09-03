@@ -888,6 +888,9 @@ export class CreateProgramComponent implements OnInit, AfterViewInit {
   }
 
   showTexbooklist(showTextBookSelector = true) {
+    // Scroll to top after navigation
+    window.scrollTo(0,0);
+
     const requestData = {
       request: {
         filters: {
